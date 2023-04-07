@@ -28,7 +28,7 @@ export const showDialog = (state) => () => {
   state.isShowDialog = true
 
   state.cloneValue = state.value.map((item) => {
-    if (item.hidden != undefined) {
+    if (item.hidden !== undefined) {
       return { ...item }
     } else {
       return { ...item, hidden: false }

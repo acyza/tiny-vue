@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { isEqual } from '@opentiny/vue-renderless/common/object'
 import { capitalize } from '@opentiny/vue-renderless/common/string'
 import { isNull } from '@opentiny/vue-renderless/common/type'

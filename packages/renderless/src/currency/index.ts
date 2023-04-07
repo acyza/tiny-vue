@@ -55,7 +55,7 @@ export const fixServiceData = ({ props, service }) => (data) => {
     data = data || []
     data = Array.isArray(data) ? data : []
 
-    const result = []
+    const result: typeof data[] = []
 
     data.forEach((option) => {
       option = option || {}

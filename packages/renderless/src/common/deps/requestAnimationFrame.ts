@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+// eslint-disable-next-line no-unused-expressions
 !(function () {
   let lastTime = 0
   const vendors = ['ms', 'moz', 'webkit', 'o']

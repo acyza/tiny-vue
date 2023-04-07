@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { comptCheckPath, handleExpand, isInPath, handleCheckChange, handleMultiCheckChange } from './index'
 
 export const api = ['state', 'handleMultiCheckChange', 'handleCheckChange', 'handleExpand']

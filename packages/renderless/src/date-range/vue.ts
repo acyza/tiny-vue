@@ -135,7 +135,7 @@ const initWatch = ({ watch, state, api }) => {
   watch(() => state.showTime, api.setTimeFormat)
 }
 
-const initApi = ({ api, state, t, vm, nextTick, refs, emit }) => {
+const initApi = ({ api, state, t, vm, nextTick, emit }) => {
   Object.assign(api, {
     t,
     state,
@@ -164,7 +164,7 @@ const initApi = ({ api, state, t, vm, nextTick, refs, emit }) => {
     handleDateChange: handleDateChange({ state, t }),
     handleTimeChange: handleTimeChange({ state, t, vm }),
     watchMinDate: watchMinDate({ state, t, vm }),
-    handleTimeInput: handleTimeInput({ nextTick, refs, state, t }),
+    handleTimeInput: handleTimeInput({ state, t }),
     watchMaxTimePickerVisible: watchMaxTimePickerVisible({ nextTick, state, vm }),
     watchMinTimePickerVisible: watchMinTimePickerVisible({ nextTick, state, vm }),
     handleDateInput: handleDateInput({ state, t }),
@@ -181,12 +181,12 @@ const initApi = ({ api, state, t, vm, nextTick, refs, emit }) => {
   })
 }
 
-export const renderless = (props, { computed, reactive, watch, nextTick }, { t, refs, emit: $emit, vm }) => {
+export const renderless = (props, { computed, reactive, watch, nextTick }, { t, emit: $emit, vm }) => {
   const api = {}
   const emit = props.emitter ? props.emitter.emit : $emit
   const state = initState({ reactive, computed, api })
 
-  initApi({ api, state, t, vm, nextTick, refs, emit })
+  initApi({ api, state, t, vm, nextTick, emit })
   initWatch({ watch, state, api })
 
   return api

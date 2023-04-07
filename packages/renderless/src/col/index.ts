@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 export const setSubitemAttrValue = ({ className, item, value }) => {
   if (value) {
     if (typeof value === 'number') {
@@ -103,7 +106,7 @@ export const row = (pcontext) => () => {
     parent = parent.$parent
 
     /* istanbul ignore next  */
-    parentName = parent && parent.$options ? parent.$options.componentName : null
+    parentName = (parent && parent.$options) ? parent.$options.componentName : null
   }
 
   /* istanbul ignore next  */

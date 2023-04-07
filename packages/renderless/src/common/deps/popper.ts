@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 import PopupManager from '@opentiny/vue-renderless/common/deps/popup-manager'
 import { typeOf } from '@opentiny/vue-renderless/common/type'
@@ -82,7 +85,7 @@ const addAttributes = (el, attributes) => {
 const getOffsetParent = (el) => {
   let offsetParent = el.offsetParent
 
-  return offsetParent === win.document.body || !offsetParent ? win.document.documentElement : offsetParent
+  return offsetParent === (win.document.body || !offsetParent) ? win.document.documentElement : offsetParent
 }
 
 const getStyleComputedProperty = (el, property) => {
@@ -110,7 +113,7 @@ const isFixed = (el) => {
 const getBoundingClientRect = (el) => {
   let rectObj = el.getBoundingClientRect()
   let isIE = navigator.userAgent.includes('MSIE')
-  let rectTop = isIE && el.tagName === 'HTML' ? -el.scrollTop : rectObj.top
+  let rectTop = (isIE && el.tagName === 'HTML') ? -el.scrollTop : rectObj.top
 
   return {
     left: rectObj.left,
@@ -179,9 +182,9 @@ const getOffsetRectRelativeToCustomParent = (el, parent, fixed) => {
   return rect
 }
 
-const getScrollTopValue = (el) => (el == document.body ? Math.max(document.documentElement.scrollTop, document.body.scrollTop) : el.scrollTop)
+const getScrollTopValue = (el) => (el === document.body ? Math.max(document.documentElement.scrollTop, document.body.scrollTop) : el.scrollTop)
 
-const getScrollLeftValue = (el) => (el == document.body ? Math.max(document.documentElement.scrollLeft, document.body.scrollLeft) : el.scrollLeft)
+const getScrollLeftValue = (el) => (el === document.body ? Math.max(document.documentElement.scrollLeft, document.body.scrollLeft) : el.scrollLeft)
 
 const getMaxWH = (body, html) => {
   const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
@@ -574,9 +577,9 @@ Popper.prototype.modifiers.applyStyle = function (data) {
   let styles = { position: data.offsets.popper.position }
   let left = Math.round(data.offsets.popper.left)
   let top = Math.round(data.offsets.popper.top)
-  let prefixedProperty
+  let prefixedProperty = this.__options.gpuAcceleration && getSupportedPropertyName('transform')
 
-  if (this._options.gpuAcceleration && (prefixedProperty = getSupportedPropertyName('transform'))) {
+  if (prefixedProperty) {
     styles[prefixedProperty] = `translate3d(${left}px, ${top}px, 0)`
     Object.assign(styles, { top: 0, left: 0 })
   } else {

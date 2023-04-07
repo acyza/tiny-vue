@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 const getIEVersion = () => {
   let version = 8
   if (!!document.addEventListener && !!window.performance) {

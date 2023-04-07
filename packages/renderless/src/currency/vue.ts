@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { init, fixServiceData, change, initService } from './index'
 
 export const api = ['state', 'change']

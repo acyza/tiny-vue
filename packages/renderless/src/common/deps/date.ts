@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { DATEPICKER } from '@opentiny/vue-renderless/common'
 import { isNull, isDate } from '@opentiny/vue-renderless/common/type'
 

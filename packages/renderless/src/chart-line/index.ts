@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, getStackMap, getLegend, hexToRgb, set } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { isNull } from '@opentiny/vue-renderless/common/type'
 import { itemPoint, itemLabel, itemContent, SAAS_DEFAULT_COLORS_10 } from '@opentiny/vue-renderless/chart-core/deps/constants'
@@ -142,9 +145,10 @@ const getLineTooltip = (args) => {
   const rightListArr = labelMap ? rightItemsArr.map((item) => (labelMap[item] === undefined ? item : labelMap[item])) : rightItemsArr
 
   return {
-    formatter(items) {
+    formatter(...args) {
+      const [items] = args
       if (tooltipFormatter) {
-        return tooltipFormatter.apply(null, arguments)
+        return tooltipFormatter.apply(...args)
       }
 
       let template = []

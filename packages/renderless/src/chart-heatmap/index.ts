@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, getBmap, getAmap, getMapJSON } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { HEAT_MAP_COLOR, itemPoint, itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 
@@ -68,7 +71,7 @@ const getVisualMap = (args) => {
     extra = { dimension: 2 }
   }
 
-  const defaultColor = type === 'map' || type === 'bmap' || type === 'amap' ? HEAT_MAP_COLOR : ['#fff', '#6D8FF0']
+  const defaultColor = (type === 'map' || type === 'bmap' || type === 'amap') ? HEAT_MAP_COLOR : ['#fff', '#6D8FF0']
 
   return Object.assign(extra, {
     min,

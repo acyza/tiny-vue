@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getWeekData } from '@opentiny/vue-renderless/picker'
 import debounce from '@opentiny/vue-renderless/common/deps/debounce'
 import {

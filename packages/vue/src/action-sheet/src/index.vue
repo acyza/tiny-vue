@@ -49,6 +49,8 @@
 </template>
 
 <script lang="tsx">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { renderless, api } from '@opentiny/vue-renderless/action-sheet/vue'
 import { $prefix, setup, defineComponent } from '@opentiny/vue-common'
 import '@opentiny/vue-theme-mobile/action-sheet/index.less'

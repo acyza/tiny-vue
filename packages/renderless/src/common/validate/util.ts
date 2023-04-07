@@ -14,7 +14,7 @@ import { hasOwn, isNull } from '@opentiny/vue-renderless/common/type'
 
 const formatRegExp = /%[sdj%]/g
 
-export let warning = () => undefined
+export const warning = () => undefined
 
 export function convertFieldsError(errors) {
   if (!errors || !errors.length) {
@@ -38,7 +38,7 @@ export function format(...args) {
   const len = args.length
 
   if (typeof checkData === 'function') {
-    return checkData.apply(null, args.slice(1))
+    return checkData(...args.slice(1))
   }
 
   if (typeof checkData === 'string') {
@@ -59,7 +59,7 @@ export function format(...args) {
             return '[Circular]'
           }
         case '%d':
-          return Number(args[i++])
+          return Number(args[i++]).toString()
         case '%s':
           return String(args[i++])
         default:
@@ -121,8 +121,8 @@ function asyncParallelArray(arrData, func, callback) {
   const results = []
   const arrLength = arrData.length
 
-  function checkCount(errors) {
-    results.push.apply(results, errors)
+  function checkCount(errors: []) {
+    results.push(...errors)
 
     count++
 
@@ -159,11 +159,11 @@ function asyncSerialArray(arr, fn, cb) {
   checkNext([])
 }
 
-function flattenObjArr(objArr) {
+function flattenObjArr(objArr: { [key: string | number | symbol]: [] }) {
   const result = []
 
   Object.keys(objArr).forEach((item) => {
-    result.push.apply(result, objArr[item])
+    result.push(...objArr[item])
   })
 
   return result
@@ -175,7 +175,7 @@ export function asyncMap(objArray, option, func, callback) {
       const errorFn = reject
       const next = (errors) => {
         callback(errors)
-        return errors.length ? errorFn({ errors, fields: convertFieldsError(errors) }) : resolve()
+        return errors.length ? errorFn({ errors, fields: convertFieldsError(errors) }) : resolve(undefined)
       }
       const flattenArr = flattenObjArr(objArray)
       asyncSerialArray(flattenArr, func, next)
@@ -197,12 +197,12 @@ export function asyncMap(objArray, option, func, callback) {
   const results = []
   const pending = new Promise((resolve, reject) => {
     const errorFn = reject
-    const next = (errors) => {
-      results.push.apply(results, errors)
+    const next = (errors: []) => {
+      results.push(...errors)
       total++
       if (total === objArrLength) {
         callback(results)
-        return results.length ? errorFn({ errors: results, fields: convertFieldsError(results) }) : resolve()
+        return results.length ? errorFn({ errors: results, fields: convertFieldsError(results) }) : resolve(undefined)
       }
     }
 

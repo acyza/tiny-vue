@@ -10,8 +10,10 @@
 *
 */
 
-import { addClass, removeClass } from '@opentiny/vue-renderless/common/deps/dom'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
+import { addClass, removeClass } from '@opentiny/vue-renderless/common/deps/dom'
 
 const setFixAnchor = ({ vm }) => {
   const { fixRef } = vm.$refs
@@ -71,7 +73,7 @@ const updateSkidPosition = ({ vm, state, emit }) => {
 }
 
 const getCurrentAnchor = ({ vm, state, link, emit }) => {
-  if (state.currentLink === link) { return }
+  if (state.currentLink === link) return
   state.currentLink = link
   updateSkidPosition({ vm, state, emit })
 }
@@ -91,7 +93,6 @@ const addObserver = ({ props, state }) => {
     })
   }
   observer(links)
-
 }
 
 const setCurrentHash = (state) => {
@@ -101,7 +102,6 @@ const setCurrentHash = (state) => {
   }
   return false
 }
-
 
 export const getContainer = ({ props }) => () => props.containerId ? document.querySelector(props.containerId) : document.body
 
@@ -149,7 +149,6 @@ export const onItersectionObserver = ({ vm, state, props, emit }) => () => {
 
   addObserver({ props, state })
 }
-
 
 export const linkClick = ({ state, vm, emit, props }) => (e, item) => {
   const { link, title } = item

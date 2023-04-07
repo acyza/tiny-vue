@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { isObject } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { itemLabel, itemContent, SAAS_DEFAULT_COLORS_10 } from '@opentiny/vue-renderless/chart-core/deps/constants'
 
@@ -20,15 +23,15 @@ const getTreeLegend = (args) => {
   return { data: result }
 }
 
-const getTreeTooltip = (args) => {
-  const { tooltipFormatter } = args
+const getTreeTooltip = (...args) => {
+  const { tooltipFormatter } = args[0]
 
   return {
     trigger: 'item',
     triggerOn: 'mousemove',
     formatter(item) {
       if (tooltipFormatter) {
-        return tooltipFormatter.apply(null, arguments)
+        return tooltipFormatter(args)
       }
       let template = []
       const { treeAncestors, value } = item

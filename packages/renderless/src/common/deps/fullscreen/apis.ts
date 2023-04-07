@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { extend } from '@opentiny/vue-renderless/common/object'
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 import screenfull from '@opentiny/vue-renderless/common/deps/fullscreen/screenfull'
@@ -155,7 +158,7 @@ const api = {
 
         this.isFullscreen = screenfull.isFullscreen
 
-        this.targetElement = !this.opts.teleport ? screenfull.targetElement : targetEle || null
+        this.targetElement = !this.opts.teleport ? screenfull.targetElement : (targetEle || null)
 
         if (this.opts.callback) {
           this.opts.callback(screenfull.isFullscreen)

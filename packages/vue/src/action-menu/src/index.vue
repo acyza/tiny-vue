@@ -6,7 +6,7 @@
         :key="index"
         :class="['tiny-action-menu__item', 'tiny-action-menu__item-visable', { 'is-disabled': visableItem.disabled }]"
       >
-        <tiny-dropdown-item :itemData="visableItem" :label="visableItem[textField]" :textField="textField" @item-click="handleItemClick">
+        <tiny-dropdown-item :item-data="visableItem" :label="visableItem[textField]" :text-field="textField" @item-click="handleItemClick">
           <template #default="{ itemData }">
             <slot name="item" :data="itemData"></slot>
           </template>
@@ -17,8 +17,8 @@
       <li v-if="state.moreOptions.length" class="tiny-action-menu__item">
         <tiny-dropdown :title="moreText" :trigger="trigger" @item-click="handleItemClick" @handle-click="handleMoreClick" @visible-change="visibleChange">
           <template #dropdown>
-            <tiny-dropdown-menu :textField="textField" :popperClass="popperClass">
-              <tiny-dropdown-item v-for="(item, index) in state.moreOptions" :key="index" :itemData="item" :label="item[textField]">
+            <tiny-dropdown-menu :text-field="textField" :popper-class="popperClass">
+              <tiny-dropdown-item v-for="(item, index) in state.moreOptions" :key="index" :item-data="item" :label="item[textField]">
                 <template #default="{ itemData }">
                   <slot name="item" :data="itemData"></slot>
                 </template>
@@ -32,6 +32,8 @@
 </template>
 
 <script lang="tsx">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { setup, $prefix, defineComponent } from '@opentiny/vue-common'
 import { renderless, api } from '@opentiny/vue-renderless/action-menu/vue'
 import '@opentiny/vue-theme/action-menu/index.less'

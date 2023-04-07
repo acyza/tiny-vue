@@ -42,7 +42,7 @@ export default function () {
   outer.appendChild(inner)
 
   const widthWithScroll = inner.offsetWidth
-  outer.parentNode.removeChild(outer)
+  outer.parentNode!.removeChild(outer)
   scrollBarWidth = widthNoScroll - widthWithScroll
 
   return scrollBarWidth

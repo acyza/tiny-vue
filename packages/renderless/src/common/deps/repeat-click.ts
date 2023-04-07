@@ -13,7 +13,7 @@
 import { on, once } from '@opentiny/vue-renderless/common/deps/dom'
 
 export default (el, binding) => {
-  let interval = null
+  let interval
   let startTime
 
   const handler = () => {
@@ -26,7 +26,7 @@ export default (el, binding) => {
     }
 
     clearInterval(interval)
-    interval = null
+    interval = undefined
   }
 
   on(el, 'mousedown', (e) => {

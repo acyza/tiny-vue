@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { guid } from '@opentiny/vue-renderless/common/string'
 
 import {

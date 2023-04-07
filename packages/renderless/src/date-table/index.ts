@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { formatDate } from '@opentiny/vue-renderless/common/deps/date-util'
 import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, prevDate, nextDate, isDate, clearTime } from '@opentiny/vue-renderless/common/deps/date-util'
 import { DATEPICKER } from '@opentiny/vue-renderless/common'

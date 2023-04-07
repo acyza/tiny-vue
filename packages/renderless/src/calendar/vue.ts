@@ -101,7 +101,7 @@ const initWatch = ({ watch, props, state, emit }) => {
   )
 }
 
-const initApi = ({ api, state, t, props }) => {
+const initApi = ({ api, state, props }) => {
   Object.assign(api, {
     state,
     genMonths,
@@ -110,7 +110,7 @@ const initApi = ({ api, state, t, props }) => {
     getTime: getTime(state),
     isToday: isToday(state),
     selectDay: selectDay(state),
-    getYearList: getYearList(t),
+    getYearList: getYearList(),
     toggeModel: toggeModel(state),
     selectMonth: selectMonth(state),
     isThisMonth: isThisMonth(state),
@@ -120,12 +120,12 @@ const initApi = ({ api, state, t, props }) => {
   })
 }
 
-export const renderless = (props, { computed, reactive, watch }, { t, emit }) => {
+export const renderless = (props, { computed, reactive, watch }, { emit }) => {
   const api = {}
   const state = initState({ reactive, props, computed, api })
 
   initWatch({ watch, props, state, emit })
-  initApi({ api, state, t, props })
+  initApi({ api, state, props })
 
   return api
 }

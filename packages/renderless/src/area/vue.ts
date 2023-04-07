@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getRegion, changeOffice, getRep, getOffice, fetchDefaultData, beforeMount } from './index'
 
 export const api = ['state', 'getRep', 'getRegion', 'getOffice', 'changeOffice']

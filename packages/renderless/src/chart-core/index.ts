@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 import { DEFAULT_COLORS, DEFAULT_THEME, STATIC_PROPS, ECHARTS_SETTINGS, SAAS_DEFAULT_COLORS_10, SAAS_DEFAULT_COLORS_18, DEFAULT_CONFIG } from './deps/constants'
 import { getType, debounce, isObject, cloneDeep, isEqual, htmlHandler } from './deps/utils'

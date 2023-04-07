@@ -96,14 +96,14 @@ export const computedIsLimitDisabled = (state) => () => {
 }
 
 export const computedIsDisabled = ({ state, props }) => () =>
-  (state.isGroup ? state.checkboxGroup.disabled || props.disabled || state.isLimitDisabled : props.disabled) || state.formDisabled
+  (state.isGroup ? (state.checkboxGroup.disabled || props.disabled || state.isLimitDisabled) : props.disabled) || state.formDisabled
 
 export const computedFormItemSize = (props) => () => (props.formItem || {}).formItemSize
 
 export const computedCheckboxSize = ({ state, props, formItemSize }) => () => {
   const tempCheckboxSize = props.size || formItemSize.value
 
-  return state.isGroup ? state.checkboxGroup.state.checkboxGroupSize || tempCheckboxSize : tempCheckboxSize
+  return state.isGroup ? (state.checkboxGroup.state.checkboxGroupSize || tempCheckboxSize) : tempCheckboxSize
 }
 
 export const mounted = ({ props, emit, api, parent }) => () => {

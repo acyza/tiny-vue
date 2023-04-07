@@ -14,7 +14,7 @@ import { handleMoreClick, handleItemClick, visibleChange } from './index'
 
 export const api = ['state', 'handleMoreClick', 'handleItemClick', 'visibleChange']
 
-export const renderless = (props, { computed, reactive }, { emit, nextTick }) => {
+export const renderless = (props, { computed, reactive }, { emit }) => {
   const api = {
     handleMoreClick: handleMoreClick(emit),
     handleItemClick: handleItemClick(emit),

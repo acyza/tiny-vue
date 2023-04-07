@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import fecha from '@opentiny/vue-renderless/common/deps/date'
 import { isNull } from '@opentiny/vue-renderless/common/type'
 import { isLeapYear } from '@opentiny/vue-renderless/common/date'
@@ -143,6 +146,7 @@ const setRangeData = (arr, start, end, value) => {
   }
 }
 
+// eslint-disable-next-line prefer-spread
 export const range = (length) => Array.apply(null, { length }).map((_, n) => n)
 
 export const getMonthDays = (date) => {

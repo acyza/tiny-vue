@@ -38,8 +38,6 @@ export const each = (obj, handle) => {
   }
 }
 
-let extend
-
 /**
  * 获得指定的命名空间的值对象。
  *
@@ -52,12 +50,12 @@ let extend
  * @param {Boolean} [isExceptRoot] 是否排除 names 的第一个节点，默认 false
  * @returns {Object}
  */
-export const getObj = (data, names, isExceptRoot) => {
-  if (!data || !isPlainObject(data) || !names || typeof names !== 'string') {
+export const getObj = (data: object, namespace: string, isExceptRoot?: boolean) => {
+  if (!data || !isPlainObject(data) || !namespace || typeof namespace !== 'string') {
     return
   }
 
-  names = names.split('.')
+  const names = namespace.split('.')
 
   let obj = data
   const len = names.length
@@ -147,8 +145,8 @@ export const setObj = (data, names, value, isMerge) => {
  * @param {Boolean} [isExclude] 是否排除指定的fields复制，默认false
  * @returns {Array}
  */
-export const copyField = (data, fields, isMerge, isExclude) => {
-  const setValue = (obj, result, name, key, isMerge) => {
+export const copyField = (data: object, fields?: any[], isMerge?: boolean, isExclude?: boolean) => {
+  const setValue = (obj, result, name, key, isMerge?) => {
     const include = key.indexOf(name) === 0
     const keySplit = key.split(name)
     const hasNextDot = keySplit[1] && keySplit[1].indexOf('.') === 0
@@ -160,7 +158,7 @@ export const copyField = (data, fields, isMerge, isExclude) => {
         })
       }
     } else {
-      if (!fields.includes(name)) {
+      if (!fields!.includes(name)) {
         setObj(result, name, getObj(obj, name), isMerge)
       }
     }
@@ -212,13 +210,13 @@ export const copyArray = (arr) => (Array.isArray(arr) ? arr.map((item) => copyFi
  */
 
 const deepCopy = (target, name, deep, copy, src) => {
-  let copyIsArray
-  if (deep && copy && (isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
+  let copyIsArray = deep && copy && (isPlainObject(copy) || Array.isArray(copy))
+  if (copyIsArray) {
     if (copyIsArray) {
       copyIsArray = false
       target[name] = copyArray(copy)
     } else {
-      const clone = src && isPlainObject(src) ? src : {}
+      const clone = (src && isPlainObject(src)) ? src : {}
       target[name] = extend(deep, clone, copy)
     }
   } else if (copy !== undefined) {
@@ -230,8 +228,7 @@ const deepCopy = (target, name, deep, copy, src) => {
   }
 }
 
-extend = function () {
-  const args = arguments
+const extend = function (this, ...args) {
   const length = args.length
   let target = args[0] || {}
   let i = 1
@@ -248,6 +245,7 @@ extend = function () {
   }
 
   if (i === length) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     target = this
     i--
   }
@@ -272,8 +270,6 @@ extend = function () {
   return target
 }
 
-let isEachEqual
-
 /**
  * 比较两个对象是否相等。
  *
@@ -286,7 +282,7 @@ let isEachEqual
  * @param {Array} [fields] 指定需要比较的字段的数组
  * @returns {Boolean}
  */
-export const isEqual = (sourceData, targetData, deep, fields) => {
+export const isEqual = (sourceData: object, targetData: object, deep: boolean, fields?: []) => {
   if (typeOf(sourceData) === typeOf(targetData)) {
     deep = deep !== false
 
@@ -317,12 +313,12 @@ export const isEqual = (sourceData, targetData, deep, fields) => {
  * @param {Boolean} [deep] 是否深度遍历
  * @returns {Boolean}
  */
-isEachEqual = (data1, data2, deep) => {
+const isEachEqual = (data1: object, data2: object, deep: boolean) => {
   if (!isPlainObject(data1)) {
     if (!Array.isArray(data1)) {
       return data1 === data2
     }
-    if (data1.length !== data2.length) {
+    if (!(Array.isArray(data2)) || data1.length !== data2.length) {
       return false
     }
 
@@ -393,9 +389,9 @@ export const toJsonStr = (obj) => {
  * @param {Object} [source] 源对象
  * @returns {Object}
  */
-export const merge = function (target) {
-  for (let i = 1, len = arguments.length; i < len; i++) {
-    const source = arguments[i] || {}
+export const merge = function (target: object, ...args: object[]) {
+  for (let i = 0, len = args.length; i < len; i++) {
+    const source = args[i] || {}
 
     for (const prop in source) {
       if (hasOwn.call(source, prop)) {
@@ -408,5 +404,5 @@ export const merge = function (target) {
     }
   }
 
-  return target
+  return target as any
 }

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { isDate, isNumber, isNumeric } from '@opentiny/vue-renderless/common/type'
 import { fillChar } from '@opentiny/vue-renderless/common/string'
 
@@ -363,7 +366,7 @@ export const toDate = (value, dateFormat, minDate) => {
 
   if (minDate) {
     const min = (minDate && toDate(minDate)) || new Date(1, 1, 1, 0, 0, 0)
-    return date && date < min ? min : date
+    return (date && date < min) ? min : date
   }
 
   return date
@@ -398,7 +401,7 @@ export const toDate = (value, dateFormat, minDate) => {
  *
  * @returns {String}
  */
-export const format = function (date, dateFormat = 'yyyy/MM/dd hh:mm:ss') {
+export const format = function (date, dateFormat = 'yyyy/MM/dd hh:mm:ss', ...args) {
   if (isDate(date)) {
     if (typeof dateFormat === 'string') {
       const o = {
@@ -428,7 +431,7 @@ export const format = function (date, dateFormat = 'yyyy/MM/dd hh:mm:ss') {
     if (arguments.length === 2) {
       dateFormat = undefined
     } else {
-      afterFormat = arguments[2]
+      afterFormat = args[0]
     }
 
     const dateValue = toDate(date, dateFormat)

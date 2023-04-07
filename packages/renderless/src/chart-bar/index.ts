@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, getStackMap, get, set, cloneDeep } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { itemPoint, itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 import { isNull } from '@opentiny/vue-renderless/common/type'

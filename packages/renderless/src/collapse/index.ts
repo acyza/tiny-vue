@@ -40,7 +40,7 @@ export const handleItemClick = ({ api, props, state }) => (item) => {
         api.setActiveNames(activeNames[0] === item.name ? '' : item.name)
       }
     } else {
-      index > -1 ? next && activeNames.splice(index, 1) : activeNames.push(item.name)
+      index > -1 ? (next && activeNames.splice(index, 1)) : activeNames.push(item.name)
 
       api.setActiveNames(activeNames)
     }

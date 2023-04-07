@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, isObject } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { isNull } from '@opentiny/vue-renderless/common/type'
 import { itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
@@ -18,9 +21,10 @@ const getTooltip = (args) => {
   const { dataType, digit, tooltipFormatter } = args
 
   return {
-    formatter(options) {
+    formatter(...args) {
+      const [options] = args
       if (tooltipFormatter) {
-        return tooltipFormatter.apply(null, arguments)
+        return tooltipFormatter(...args)
       }
 
       const tpl = []

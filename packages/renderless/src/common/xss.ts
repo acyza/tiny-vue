@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import * as xss$1 from 'xss'
 
 let getWindow = function () {
@@ -42,7 +45,7 @@ let defFillPool = function (bytes) {
   bufferOffset += bytes
 }
 let nanoid$2 = function (size) {
-  if (size === void 0) {
+  if (size === undefined) {
     size = 21
   }
   defFillPool((size -= 0))
@@ -60,7 +63,7 @@ let defCustomRandom = function (alphabet, defaultSize, randomFunc) {
   let mask = (2 << (31 - Math.clz32((alphabet.length - 1) | 1))) - 1
   let step = Math.ceil((1.6 * mask * defaultSize) / alphabet.length)
   return function (size) {
-    if (size === void 0) {
+    if (size === undefined) {
       size = defaultSize
     }
     let uniq = ''
@@ -75,7 +78,7 @@ let defCustomRandom = function (alphabet, defaultSize, randomFunc) {
   }
 }
 let customAlphabet$1 = function (alphabet, defaultSize) {
-  if (defaultSize === void 0) {
+  if (defaultSize === undefined) {
     defaultSize = 21
   }
   return defCustomRandom(alphabet, defaultSize, defRandomFunc)
@@ -222,9 +225,9 @@ let getXssOption = function () {
   return xssOptions
 }
 let setXssOption = function (option) {
-  let _a
+  let _a = option?.html
   let whiteList
-  if ((_a = option === null || option === void 0 ? void 0 : option.html) === null || _a === void 0 ? void 0 : _a.whiteList) {
+  if (option?.html === null || _a?.whiteList) {
     whiteList = Object.assign(xssOptions.html.whiteList, option.html.whiteList)
   }
   xssOptions = Object.assign(xssOptions, option)
@@ -310,15 +313,12 @@ let _console = _win[_cnsl] || {}
 let isOpen = true
 let _print = {}
 let _log = function (csl, type) {
-  return function () {
-    let args = []
-    for (let i = 0; i < arguments.length; i++) {
-      args[i] = arguments[i]
-    }
+  return function (...args) {
     if (!isOpen) {
       return
     }
     if (csl[type] && typeof csl[type] === 'function') {
+      // eslint-disable-next-line prefer-spread
       csl[type].apply(csl, args)
     }
   }
@@ -347,13 +347,13 @@ let _logger = Object.freeze({
   'default': logger
 })
 
-let def = {
+const def = {
   nanoid: _nanoid,
   xss: _xss,
   log: _logger
 }
-let nanoid = _nanoid
-let xss = _xss
-let log = _logger
+const nanoid = _nanoid
+const xss = _xss
+const log = _logger
 
 export { def as default, log, nanoid, xss }

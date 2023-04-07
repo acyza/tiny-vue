@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { isPlainObject, isNumber, isNumeric, isNull } from '@opentiny/vue-renderless/common/type'
 import { getObj, toJsonStr } from '@opentiny/vue-renderless/common/object'
 import { toFixed } from '@opentiny/vue-renderless/common/decimal'
@@ -377,7 +380,7 @@ export const fieldFormat = (string, data, type = 'html') => {
         }
       }
 
-      return format === formatTypes.url && value.length === 0 ? '' : slash + value
+      return (format === formatTypes.url && value.length === 0) ? '' : slash + value
     })
   }
 }
@@ -395,7 +398,7 @@ const getFormatText = () => (str, reg, args, format) =>
       return ''
     }
 
-    return typeof value === 'string' && typeof format === 'function' ? format(string) : string
+    return (typeof value === 'string' && typeof format === 'function') ? format(string) : string
   })
 
 const getResult = ({ type, res, formatText, string, reg, args }) => {
@@ -453,7 +456,7 @@ const checkParam = ({ data, args, type, _arguments }) => {
  * @param {String} [type="text"] 替换的类型："text"、"url"、"html"，默认"text"
  * @returns {String}
  */
-export const format = function (string, data, type = 'text') {
+export const format = function (string, data, type = 'text', ..._args) {
   if (typeof string !== 'string' || arguments.length < 2) {
     return string
   }
@@ -464,7 +467,7 @@ export const format = function (string, data, type = 'text') {
     return fieldFormat(string, data, type)
   }
 
-  const ret = checkParam({ data, args, type, _arguments: arguments })
+  const ret = checkParam({ data, args, type, _arguments: [string, data, type, ..._args] })
 
   args = ret.args
   type = ret.type
@@ -512,7 +515,7 @@ export const truncate = (string, length, ellipsis = '{0}...') => {
  * @returns {Number|String}
  */
 export const tryToConvert = (convert, defaultValue, ...args) => {
-  const result = convert.apply(null, args)
+  const result = convert(...args)
   return isNaN(result) ? defaultValue : result
 }
 
@@ -705,7 +708,7 @@ export const toBoolValue = (value) => {
  * @param {Number} [fraction=2] 数值的小数部分，默认为2
  * @returns {String}
  */
-export const toRate = (value, total = 1, fraction = 2) => (isNumber(value) && isNumber(total) ? `${toDecimal((value * 100) / total, fraction)}%` : value)
+export const toRate = (value, total = 1, fraction = 2) => ((isNumber(value) && isNumber(total)) ? `${toDecimal((value * 100) / total, fraction)}%` : value)
 
 /**
  * 文件大小值 单位互相转换。

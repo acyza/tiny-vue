@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getBmap } from '@opentiny/vue-renderless/chart-core/deps/utils'
 
 export const bmap = (columns, rows, settings, extra) => {

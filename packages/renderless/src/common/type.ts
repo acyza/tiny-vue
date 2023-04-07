@@ -29,7 +29,7 @@ const class2type = {
   '[object Boolean]': 'boolean'
 }
 
-export const isNull = (x) => x === null || x === undefined || x === 'undefined'
+export const isNull = (x) => x === null || x === void 0 || x === 'undefined'
 
 /**
  * 返回 JavaScript 对象的类型。
@@ -54,7 +54,7 @@ export const isNull = (x) => x === null || x === undefined || x === 'undefined'
  * @param {Object} obj 对象
  * @returns {String}
  */
-export const typeOf = (obj) => (isNull(obj) ? String(obj) : class2type[toString.call(obj)] || 'object')
+export const typeOf = (obj) => (isNull(obj) ? String(obj) : (class2type[toString.call(obj)] || 'object'))
 
 /**
  * 判断对象是否为 object 类型。

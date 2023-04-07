@@ -10,8 +10,19 @@
 *
 */
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { isLeapYear } from '@opentiny/vue-renderless/common/date'
 import { copyArray } from '@opentiny/vue-renderless/common/object'
+
+// todo 补充state和props
+type state = any
+type props = any
+
+interface StateAndProps {
+  state: state
+  props: props
+}
 
 /**
  * 获取指定年月的总天数
@@ -20,7 +31,7 @@ import { copyArray } from '@opentiny/vue-renderless/common/object'
  * @param {Number} month - 月
  * @returns {Number} - 总天数
  */
-export const getDays = (year, month) => [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1]
+export const getDays = (year: number, month: number) => [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1]
 
 /**
  * 根据日期获取星期
@@ -30,7 +41,7 @@ export const getDays = (year, month) => [31, isLeapYear(year) ? 29 : 28, 31, 30,
  * @param {Number} month - 日
  * @returns {Number} - 星期
  */
-export const getWeek = (year, month, day) => new Date(`${year}/${month}/${day}`).getDay()
+export const getWeek = (year: number, month: number, day: number) => new Date(`${year}/${month}/${day}`).getDay()
 
 /**
  * 上月日期
@@ -39,7 +50,7 @@ export const getWeek = (year, month, day) => new Date(`${year}/${month}/${day}`)
  * @param {Number} month - 月
  * @returns {Object} - 年月
  */
-export const lastMonth = (year, month) => {
+export const lastMonth = (year: number, month: number) => {
   // 年月转换成整型
   year = Number(year)
   month = Number(month)
@@ -61,7 +72,7 @@ export const lastMonth = (year, month) => {
  * @param {Number} month - 月
  * @returns {Object} - 年月
  */
-export const nextMonth = (year, month) => {
+export const nextMonth = (year: number, month: number) => {
   // 年月转换成整型
   year = Number(year)
   month = Number(month)
@@ -83,7 +94,7 @@ export const nextMonth = (year, month) => {
  * @param {Number} month - 月
  * @returns {Object} - 日历
  */
-export const getCalendar = (year, month) => {
+export const getCalendar = (year: number, month: number) => {
   if (year && month && month <= 12) {
     const days = getDays(year, month)
     const firstWeek = getWeek(year, month, 1)
@@ -122,8 +133,9 @@ export const getCalendar = (year, month) => {
  * @param {Array} array - 一维数据
  * @returns {Array} - 7*N 日历数据
  */
+// todo
 export const transformArray = (array) => {
-  const result = []
+  const result: any[][] = []
   let index = 0
 
   if (array && array.length) {
@@ -147,9 +159,9 @@ export const transformArray = (array) => {
  * @param {Number | String} time - 时间戳或标准的日期字符
  * @returns {Object} - 年月日时分秒
  */
-export const parseDate = (time) => {
+export const parseDate = (time: number | string) => {
   /* istanbul ignore next */
-  const date = new Date(time && typeof time === 'number' ? time : 0)
+  const date = new Date((time && typeof time === 'number') ? time : 0)
 
   return {
     year: date.getFullYear(),
@@ -160,10 +172,10 @@ export const parseDate = (time) => {
     seconds: date.getSeconds()
   }
 }
-
+// todo
 export const computedCalendar = ({ state }) => () => {
   const calendar = getCalendar(state.activeYear, state.activeMonth)
-  const result = []
+  const result: any[] = []
 
   if (calendar) {
     const { last, current, next } = calendar
@@ -189,8 +201,8 @@ export const computedCalendar = ({ state }) => () => {
 
   return transformArray(result)
 }
-
-export const computedEventList = ({ props, state }) => () => {
+// todo
+export const computedEventList = ({ props, state }: StateAndProps) => () => {
   let result = []
 
   if (props.events && props.events.length) {
@@ -204,7 +216,7 @@ export const computedEventList = ({ props, state }) => () => {
   return result
 }
 
-export const toggeModel = (state) => (mode) => {
+export const toggeModel = (state: state) => (mode: string) => {
   const isYearOrMonth = /^(year|month)$/.test(mode)
 
   state.displayMode = isYearOrMonth ? mode : state.displayMode === 'year' ? 'month' : 'year'
@@ -215,7 +227,7 @@ export const toggeModel = (state) => (mode) => {
  * @private
  * @param {Number} month - 月份
  */
-export const selectMonth = (state) => (month) => {
+export const selectMonth = (state: state) => (month: number) => {
   if (month && typeof month === 'number' && month <= 12) {
     state.activeMonth = month
   }
@@ -226,8 +238,10 @@ export const selectMonth = (state) => (month) => {
  * @public
  * @param {Number} day
  */
-export const selectDay = (state) => (day) => {
+export const selectDay = (state: state) => (day: number) => {
+  // @ts-expect-error
   if (day && day.value) {
+    // @ts-expect-error
     if (day.isLast) {
       const { year, month } = lastMonth(state.activeYear, state.activeMonth)
 
@@ -235,6 +249,7 @@ export const selectDay = (state) => (day) => {
       state.activeYear = year
     }
 
+    // @ts-expect-error
     if (day.isNext) {
       const { year, month } = nextMonth(state.activeYear, state.activeMonth)
 
@@ -242,8 +257,10 @@ export const selectDay = (state) => (day) => {
       state.activeYear = year
     }
 
+    // @ts-expect-error
     state.selectedTip = `You selected date: ${state.activeYear}-${state.activeMonth}-${day.value}`
 
+    // @ts-expect-error
     state.selectedDate = Number(new Date(`${state.activeYear}/${state.activeMonth}/${day.value}`))
   }
 }
@@ -254,7 +271,7 @@ export const selectDay = (state) => (day) => {
  * @param {Number} day
  * @returns {Array}
  */
-export const getEventByDay = (state) => (day) => {
+export const getEventByDay = (state: state) => (day: number) => {
   let events = []
 
   if (state.eventList && state.eventList.length) {
@@ -279,7 +296,7 @@ export const getEventByDay = (state) => (day) => {
  * @param {Number} month
  * @returns {Array}
  */
-export const getEventByMonth = ({ props, state }) => (month) => {
+export const getEventByMonth = ({ props, state }: StateAndProps) => (month: number) => {
   let events = []
 
   if (props.events) {
@@ -304,7 +321,7 @@ export const getEventByMonth = ({ props, state }) => (month) => {
  * @param {Number} day
  * @returns {Number}
  */
-export const getTime = (state) => (day) => Number(new Date(`${state.activeYear}/${state.activeMonth}/${day}`))
+export const getTime = (state: state) => (day: number) => Number(new Date(`${state.activeYear}/${state.activeMonth}/${day}`))
 
 /**
  * 获取年列表（今年上下10年）
@@ -314,7 +331,7 @@ export const getTime = (state) => (day) => Number(new Date(`${state.activeYear}/
 export const getYearList = () => () => {
   const date = new Date()
   const year = date.getFullYear()
-  const yesrs = []
+  const yesrs: number[] = []
 
   for (let i = year - 10; i < year + 10; i++) {
     yesrs.push(i)
@@ -329,11 +346,12 @@ export const getYearList = () => () => {
  * @param {Number} day
  * @returns {Boolean}
  */
-export const isToday = (state) => (day) => {
+export const isToday = (state: state) => (day: number) => {
   const date = new Date()
   let year = Number(state.activeYear)
   let month = Number(state.activeMonth)
 
+  // @ts-expect-error
   if (day.isLast) {
     const lastDate = lastMonth(state.activeYear, state.activeMonth)
 
@@ -341,13 +359,14 @@ export const isToday = (state) => (day) => {
     month = lastDate.month
   }
 
+  // @ts-expect-error
   if (day.isNext) {
     const nextDate = nextMonth(state.activeYear, state.activeMonth)
 
     year = nextDate.year
     month = nextDate.month
   }
-
+  // @ts-expect-error
   return date.getDate() === day.value && date.getFullYear() === year && date.getMonth() + 1 === month
 }
 
@@ -357,7 +376,7 @@ export const isToday = (state) => (day) => {
  * @param {Number} month
  * @returns {Boolean}
  */
-export const isThisMonth = (state) => (month) => {
+export const isThisMonth = (state: state) => (month: number) => {
   const date = new Date()
   const year = Number(state.activeYear)
 
@@ -371,7 +390,7 @@ export const isThisMonth = (state) => (month) => {
  * @returns {Boolean}
  */
 export const genMonths = () => {
-  const result = []
+  const result: number[][] = []
   let index = 1
 
   for (let i = 0; i < 3; i++) {

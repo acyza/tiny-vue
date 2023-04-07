@@ -44,14 +44,12 @@ export default function (delay, noTrailing, callback, debounceMode) {
     noTrailing = undefined
   }
 
-  function wrapper() {
-    const me = this
+  function wrapper(...args) {
     const elapsed = new Date().valueOf() - lastExec
-    const args = arguments
 
-    function exec() {
+    function exec(this: any) {
       lastExec = new Date().valueOf()
-      callback.apply(me, args)
+      callback.apply(this, args)
     }
 
     function clear() {

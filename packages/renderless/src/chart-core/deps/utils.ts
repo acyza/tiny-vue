@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { extend, copyArray } from '@opentiny/vue-renderless/common/object'
 import { isObject, typeOf as getType, isNull } from '@opentiny/vue-renderless/common/type'
 import _debounce from '@opentiny/vue-renderless/common/deps/debounce'

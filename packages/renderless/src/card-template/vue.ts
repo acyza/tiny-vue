@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { toolClick, computedTools, computedMoreTools } from './index'
 
 export const api = ['state', 'toolClick']

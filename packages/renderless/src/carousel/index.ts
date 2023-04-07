@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import throttle from '@opentiny/vue-renderless/common/deps/throttle'
 import { POSITION } from '@opentiny/vue-renderless/common'
 

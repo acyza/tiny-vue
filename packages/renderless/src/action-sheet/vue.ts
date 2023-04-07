@@ -10,6 +10,8 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { setSheetStyle, initScrollMenu, visibleHandle, watchVisible, menuHandle } from './index'
 
 export const api = ['state', 'setSheetStyle', 'initScrollMenu', 'visibleHandle', 'menuHandle']

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { merge } from '@opentiny/vue-renderless/common/object'
 import { markNodeData, NODE_KEY } from '@opentiny/vue-renderless/common/deps/tree-model/util'
 import { indexOf } from '@opentiny/vue-renderless/common/array'

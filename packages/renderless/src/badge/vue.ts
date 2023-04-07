@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { computedContent, computedValueRef } from './index'
 import { xss } from '@opentiny/vue-renderless/common/xss'
 

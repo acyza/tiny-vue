@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import {
   isDate,
   nextDate,
@@ -154,7 +157,7 @@ export const watchValue = ({ state }) => (value) => {
         const maxDateYear = state.maxDate.getFullYear()
         const maxDateMonth = state.maxDate.getMonth()
 
-        state.rightDate = minDateYear === maxDateYear && minDateMonth === maxDateMonth ? nextMonth(state.maxDate) : state.maxDate
+        state.rightDate = (minDateYear === maxDateYear && minDateMonth === maxDateMonth) ? nextMonth(state.maxDate) : state.maxDate
       } else {
         state.rightDate = nextMonth(state.leftDate)
       }
@@ -170,7 +173,7 @@ export const watchDefault = ({ state }) => (value) => {
     const [left, right] = calcDefaultValue(value)
 
     state.leftDate = left
-    state.rightDate = value && value[1] && state.unlinkPanels ? right : nextMonth(state.leftDate)
+    state.rightDate = (value && value[1] && state.unlinkPanels) ? right : nextMonth(state.leftDate)
   }
 }
 
@@ -422,11 +425,11 @@ export const isValidValue = ({ state }) => (value) =>
   isDate(value[0]) &&
   isDate(value[1]) &&
   value[0].getTime() <= value[1].getTime() &&
-  (typeof state.disabledDate === 'function' ? !state.disabledDate(value[0]) && !state.disabledDate(value[1]) : true)
+  (typeof state.disabledDate === 'function' ? (!state.disabledDate(value[0]) && !state.disabledDate(value[1])) : true)
 
 export const resetView = ({ state }) => () => {
-  state.minDate = state.value && isDate(state.value[0]) ? new Date(state.value[0]) : null
-  state.maxDate = state.value && isDate(state.value[0]) ? new Date(state.value[1]) : null
+  state.minDate = (state.value && isDate(state.value[0])) ? new Date(state.value[0]) : null
+  state.maxDate = (state.value && isDate(state.value[0])) ? new Date(state.value[1]) : null
 }
 
 export const setTimeFormat = ({ nextTick, vm, state }) => () => {

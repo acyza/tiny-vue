@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { KEY_CODE } from '@opentiny/vue-renderless/common'
 import { addClass, removeClass, on } from '@opentiny/vue-renderless/common/deps/dom'
 

@@ -100,7 +100,7 @@ export const updateInnerValue = ({ api, constants, props, refs, state }) => () =
 }
 
 export const formatValue = (props) => (value) => {
-  if (!Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime())) {
+  if (!(Object.prototype.toString.call(value) === '[object Date]') && !isNaN(value.getTime())) {
     value = props.minDate
   }
 
@@ -256,7 +256,7 @@ export const getDisplayValue = ({ constants, DATE, props, state }) => () => {
     }
     for (let k in o) {
       if (new RegExp('(' + k + ')').test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(String(o[k]).length))
+        fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(String(o[k]).length))
       }
     }
     return fmt

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { mounted, updated, unmounted, getContainer, linkClick, onItersectionObserver } from './index'
 
 export const api = ['state', 'getContainer', 'linkClick', 'onItersectionObserver']

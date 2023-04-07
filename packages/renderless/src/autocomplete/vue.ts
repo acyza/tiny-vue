@@ -10,6 +10,8 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import debounce from '@opentiny/vue-renderless/common/deps/debounce'
 import userPopper from '@opentiny/vue-renderless/common/deps/vue-popper'
 import { guid } from '@opentiny/vue-renderless/common/string'

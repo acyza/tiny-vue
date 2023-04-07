@@ -12,7 +12,7 @@
 
 const isServer = typeof window === 'undefined'
 
-export default (container, selected) => {
+export default (container, selected: HTMLElement) => {
   if (isServer) {
     return
   }
@@ -22,12 +22,12 @@ export default (container, selected) => {
     return
   }
 
-  const offsetParents = []
+  const offsetParents: HTMLElement[] = []
   let { offsetParent, offsetTop, offsetHeight } = selected
 
   while (offsetParent && container !== offsetParent && container.contains(offsetParent)) {
-    offsetParents.push(offsetParent)
-    offsetParent = offsetParent.offsetParent
+    offsetParents.push(offsetParent as HTMLElement)
+    offsetParent = (offsetParent as HTMLElement).offsetParent
   }
 
   const top = offsetTop + offsetParents.reduce((prev, curr) => prev + curr.offsetTop, 0)

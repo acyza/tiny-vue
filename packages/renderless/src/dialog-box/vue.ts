@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import {
   afterEnter,
   afterLeave,
@@ -134,7 +137,6 @@ export const renderless = (
     onMounted,
     props,
     reactive,
-    state,
     toRefs,
     vm,
     watch

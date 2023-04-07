@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { fillChar } from '@opentiny/vue-renderless/common/string'
 
 const BigInt = window.BigInt
@@ -90,14 +93,14 @@ export function getNumberPrecision(number) {
     let precision = Number(numStr.slice(numStr.indexOf('e-') + 2))
     let decimalMatch = numStr.match(/\.(\d+)/)
 
-    if (decimalMatch === null || decimalMatch === void 0 ? void 0 : decimalMatch[1]) {
+    if (decimalMatch?.[1]) {
       precision += decimalMatch[1].length
     }
 
     return precision
   }
 
-  return ~numStr.indexOf('.') && validateNumber(numStr) ? numStr.length - numStr.indexOf('.') - 1 : 0
+  return (~numStr.indexOf('.') && validateNumber(numStr)) ? numStr.length - numStr.indexOf('.') - 1 : 0
 }
 
 /**
@@ -138,8 +141,6 @@ const DecimalCls = {
   CLS: null
 }
 
-let setDecimalClass
-
 export function getMiniDecimal(value, decimal) {
   // We use BigInt here. Will fallback to Number if not support.
   if (!DecimalCls.CLS) {
@@ -157,12 +158,12 @@ export class BigIntDecimal {
     }
 
     this.origin = String(value)
-    this.negative = void 0
-    this.integer = void 0
-    this.decimal = void 0
-    this.decimalLen = void 0
-    this.empty = void 0
-    this.nan = void 0
+    this.negative = undefined
+    this.integer = undefined
+    this.decimal = undefined
+    this.decimalLen = undefined
+    this.empty = undefined
+    this.nan = undefined
 
     if (value === '-') {
       this.nan = true
@@ -288,8 +289,8 @@ export class NumberDecimal {
       return
     }
     this.origin = ''
-    this.number = void 0
-    this.empty = void 0
+    this.number = undefined
+    this.empty = undefined
 
     this.origin = String(value)
     this.number = Number(value)
@@ -361,7 +362,7 @@ export class NumberDecimal {
   }
 }
 
-setDecimalClass = function (decimaljs) {
+function setDecimalClass(decimaljs) {
   DecimalCls.CLS = supportBigInt() ? BigIntDecimal : typeof decimaljs === 'function' ? decimaljs : NumberDecimal
 }
 

@@ -10,6 +10,9 @@
  *
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import PopupManager from '@opentiny/vue-renderless/common/deps/popup-manager'
 import PopperJS from '@opentiny/vue-renderless/common/deps/popper'
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
@@ -121,61 +124,59 @@ const createPopperFn =
     appendArrow,
     emit,
     resetTransformOrigin,
-    nextTick,
-    updatePopper,
     nextZIndex,
     parent
   }) =>
-  (dom) => {
-    if (isServer) {
-      return
-    }
+    (dom) => {
+      if (isServer) {
+        return
+      }
 
-    state.currentPlacement = state.currentPlacement || props.placement
+      state.currentPlacement = state.currentPlacement || props.placement
 
-    if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(state.currentPlacement)) {
-      return
-    }
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(state.currentPlacement)) {
+        return
+      }
 
-    const options = props.popperOptions || { gpuAcceleration: false }
-    state.popperElm = state.popperElm || props.popper || refs.popper || dom
-    const popper = state.popperElm
-    let reference = getReference({ state, props, refs, slots })
+      const options = props.popperOptions || { gpuAcceleration: false }
+      state.popperElm = state.popperElm || props.popper || refs.popper || dom
+      const popper = state.popperElm
+      let reference = getReference({ state, props, refs, slots })
 
-    if (!popper || !reference || reference.nodeType !== Node.ELEMENT_NODE) {
-      return
-    }
+      if (!popper || !reference || reference.nodeType !== Node.ELEMENT_NODE) {
+        return
+      }
 
-    if (props.visibleArrow) {
-      appendArrow(popper)
-    }
+      if (props.visibleArrow) {
+        appendArrow(popper)
+      }
 
-    appendPopper({ options, props, state, parent })
+      appendPopper({ options, props, state, parent })
 
-    if (props.popperJS && state.popperJS.destroy) {
-      state.popperJS.destroy()
-    }
+      if (props.popperJS && state.popperJS.destroy) {
+        state.popperJS.destroy()
+      }
 
-    options.placement = state.currentPlacement
-    options.offset = props.offset || 0
-    options.arrowOffset = props.arrowOffset || 0
-    options.adjustArrow = props.adjustArrow || false
+      options.placement = state.currentPlacement
+      options.offset = props.offset || 0
+      options.arrowOffset = props.arrowOffset || 0
+      options.adjustArrow = props.adjustArrow || false
 
-    state.popperJS = new PopperJS(reference, popper, options)
-    state.popperJS.onCreate(() => {
-      emit('created', state)
-      resetTransformOrigin()
+      state.popperJS = new PopperJS(reference, popper, options)
+      state.popperJS.onCreate(() => {
+        emit('created', state)
+        resetTransformOrigin()
       // 原来代码逻辑会触发2次updatePopper,暂时注释掉这一处，待观察
       // new PopperJS 内部已经调用this.update了，所以屏蔽： nextTick(updatePopper)
-    })
+      })
 
-    if (typeof options.onUpdate === 'function') {
-      state.popperJS.onUpdate(options.onUpdate)
+      if (typeof options.onUpdate === 'function') {
+        state.popperJS.onUpdate(options.onUpdate)
+      }
+
+      state.popperJS._popper.style.zIndex = nextZIndex(state.popperJS._reference)
+      on(state.popperElm, 'click', stop)
     }
-
-    state.popperJS._popper.style.zIndex = nextZIndex(state.popperJS._reference)
-    on(state.popperElm, 'click', stop)
-  }
 
 const appendArrowFn = (state) => (el) => {
   let hash

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { random } from '@opentiny/vue-renderless/common/string'
 import { itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 
@@ -61,7 +64,7 @@ const getTooltip = (args) => {
     const { name, value } = data
 
     if (tooltipFormatter) {
-      return tooltipFormatter.apply(null, params)
+      return tooltipFormatter(...params)
     }
 
     return `${itemLabel(name)}${itemContent(value)}`

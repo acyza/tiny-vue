@@ -10,6 +10,8 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 import { formatNumber } from '@opentiny/vue-renderless/common/decimal'
 import { getMiniDecimal, equalsDecimal } from '@opentiny/vue-renderless/common/bigInt'
@@ -47,7 +49,7 @@ export const popInput = ({ editorState, props, state, api }) => (value) => {
   } else {
     value = value
       .split('.')
-      .map((a, i) => (i && props.strictInput && typeof fraction === 'number' ? a.substr(0, fraction) : a))
+      .map((a, i) => ((i && props.strictInput && typeof fraction === 'number') ? a.substr(0, fraction) : a))
       .join('.')
   }
 
@@ -229,7 +231,7 @@ export const onInput = ({ state, props, api }) => (value) => {
   } else {
     value = value
       .split('.')
-      .map((a, i) => (i && props.strictInput && typeof fraction === 'number' ? a.substr(0, fraction) : a))
+      .map((a, i) => ((i && props.strictInput && typeof fraction === 'number') ? a.substr(0, fraction) : a))
       .join('.')
   }
 
@@ -288,7 +290,7 @@ export const watchCurrency = ({ api, state, editorState }) => (value) => {
 export const initAmount = (props) => () => {
   let value = props.modelValue
 
-  value = value === null || isNaN(Number(value)) ? '' : value
+  value = (value === null || isNaN(Number(value))) ? '' : value
 
   if (!props.negative && value && Number(value) < 0) {
     value -= 0

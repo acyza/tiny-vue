@@ -66,7 +66,7 @@ export const computedCheckboxGroup = ({ parent, constants }) => () => {
 }
 
 export const computedIsDisabled = ({ state, props }) => () =>
-  state.checkboxGroup ? state.checkboxGroup.disabled || props.disabled || state.isLimitDisabled : props.disabled
+  state.checkboxGroup ? (state.checkboxGroup.disabled || props.disabled || state.isLimitDisabled) : props.disabled
 
 export const computedActiveStyle = (state) => () => ({
   backgroundColor: state.checkboxGroup.fill || '',

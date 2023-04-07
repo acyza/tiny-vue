@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { hasOwn, isObject, isNull } from '@opentiny/vue-renderless/common/type'
 
 const isServer = typeof window === 'undefined'
@@ -54,10 +57,10 @@ export const off = (() => {
   }
 })()
 
-export const once = (el, event, fn) => {
+export const once = (el, event, fn, ...args) => {
   const listener = function () {
     if (fn) {
-      fn.apply(this, arguments)
+      fn.apply(this, el, event, fn, ...args)
     }
 
     off(el, event, listener)
@@ -149,7 +152,7 @@ export const getStyle = (el, styleName) => {
   try {
     const computed = document.defaultView.getComputedStyle(el, '')
 
-    return el.style[styleName] || computed ? computed[styleName] : null
+    return (el.style[styleName] || computed) ? computed[styleName] : null
   } catch (e) {
     return el.style[styleName]
   }

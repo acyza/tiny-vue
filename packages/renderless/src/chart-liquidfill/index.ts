@@ -10,13 +10,16 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, isObject } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 
 const isArr = Array.isArray
 
-const getTooltip = (args) => {
-  const { tooltipFormatter, dataType, digit } = args
+const getTooltip = (...args) => {
+  const { tooltipFormatter, dataType, digit } = args[0]
   function formatter(options) {
     const { seriesName, value } = options
 
@@ -24,7 +27,7 @@ const getTooltip = (args) => {
       return [`${itemLabel(seriesName)}`, itemContent(getFormated(value, dataType, digit))].join('')
     }
 
-    return tooltipFormatter.apply(null, arguments)
+    return tooltipFormatter.apply(...args)
   }
 
   return { show: true, formatter }

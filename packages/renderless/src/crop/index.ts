@@ -29,33 +29,33 @@ export const watchVisible = ({ api, state }) => (value) => {
   state.cropvisible = value
 }
 
-export const shortcutKeys = (api) => (e) => {
-  if (e.keyCode == 187 && e.ctrlKey) {
+export const shortcutKeys = (api) => (e: KeyboardEvent) => {
+  if (e.keyCode === 187 && e.ctrlKey) {
     e.preventDefault()
     api.zoom(0.1)
   }
 
-  if (e.keyCode == 189 && e.ctrlKey) {
+  if (e.keyCode === 189 && e.ctrlKey) {
     e.preventDefault()
     api.zoom(-0.1)
   }
 
-  if (e.keyCode == 38 && e.ctrlKey) {
+  if (e.keyCode === 38 && e.ctrlKey) {
     e.preventDefault()
     api.move(0, 1)
   }
 
-  if (e.keyCode == 40 && e.ctrlKey) {
+  if (e.keyCode === 40 && e.ctrlKey) {
     e.preventDefault()
     api.move(0, -1)
   }
 
-  if (e.keyCode == 37 && e.ctrlKey) {
+  if (e.keyCode === 37 && e.ctrlKey) {
     e.preventDefault()
     api.move(1, 0)
   }
 
-  if (e.keyCode == 39 && e.ctrlKey) {
+  if (e.keyCode === 39 && e.ctrlKey) {
     e.preventDefault()
     api.move(-1, 0)
   }
@@ -189,8 +189,8 @@ export const setImage = ({ api, state, props }) => (e) => {
   const reader = new FileReader()
 
   reader.onload = (event) => {
-    state.src = event.target.result
-    api.replace(event.target.result)
+    state.src = event.target!.result
+    api.replace(event.target!.result)
   }
 
   reader.readAsDataURL(file)

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import PopupManager from '@opentiny/vue-renderless/common/deps/popup-manager'
 
 export const toolClick = (showMoreTools) => (cb) => {
@@ -17,7 +20,7 @@ export const toolClick = (showMoreTools) => (cb) => {
   showMoreTools.value = false
 }
 
-export const computedMoreTools = ({ props }) => () => (Array.isArray(props.tools) && props.tools.length > 3 ? props.tools.slice(2) : [])
+export const computedMoreTools = ({ props }) => () => ((Array.isArray(props.tools) && props.tools.length > 3) ? props.tools.slice(2) : [])
 
 export const computedTools = ({ props, state, constants, refs, t }) => () => {
   let result = []

@@ -3,13 +3,40 @@
     "forceConsistentCasingInFileNames": true,
     "target": "es2017",
     "module": "esnext",
-    "lib": ["esnext", "DOM"],
+    "lib": [
+      "esnext",
+      "DOM"
+    ],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "paths": {
+      "@opentiny/vue-autonavi-map": [
+        "../vue/src/chart/autonavi-map"
+      ],
+      "@opentiny/vue-baidu-map": [
+        "../vue/src/chart/baidu-map"
+      ],
+      "@opentiny/vue-chart-*": [
+        "../vue/src/chart/chart-*"
+      ],
+      "@opentiny/vue-*": [
+        "../vue-*",
+        "../vue/src/*"
+      ],
+      "@opentiny/vue-renderless*": [
+        "../renderless/src*"
+      ],
+      "virtual:common/adapter/vue": [
+        "../vue-common/src/adapter/vue3/index.ts"
+      ],
+      "virtual:locale/vue": [
+        "../vue-locale/src/vue3/index.ts"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, setArrayValue, cloneDeep } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { itemPoint, itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 import { isNull } from '@opentiny/vue-renderless/common/type'
@@ -78,7 +81,7 @@ const getPieSeries = (args) => {
     serie.itemStyle = { borderWidth: 2, borderColor: '#fff', ...itemStyle }
 
     if (percentShow) {
-      let position = rowsCount > 1 && index === 0 ? 'inner' : 'outside'
+      let position = (rowsCount > 1 && index === 0) ? 'inner' : 'outside'
       let formatter = function (item) {
         let tplt = []
 

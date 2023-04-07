@@ -38,13 +38,13 @@ const getError = (action, option, xhr) => {
     errorText = `fail to post ${action} ${xhr.status}`
   }
 
-  const error = new Error(errorText)
+  const error = new Error(errorText) as any
 
   error.status = xhr.status
   error.method = 'post'
   error.url = action
 
-  return error
+  return error as Error
 }
 
 export default (option) => {
@@ -58,7 +58,7 @@ export default (option) => {
   if (xhr.upload) {
     xhr.upload.onprogress = (event) => {
       if (event.total > 0) {
-        event.percent = (event.loaded / event.total) * 100
+        (event as any).percent = (event.loaded / event.total) * 100
       }
 
       option.onProgress(event)

@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { processIndex, calculateTranslate, translateItem, handleItemClick, computedTransform } from './index'
 
 export const api = [

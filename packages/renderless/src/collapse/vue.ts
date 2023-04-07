@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { setActiveNames, handleItemClick } from './index'
 
 export const api = ['state']
@@ -31,7 +34,7 @@ export const renderless = (props, { reactive, watch }, { parent, emit, constants
   watch(
     () => props.modelValue,
     (value) => {
-      state.activeNames = value || value === 0 ? [].concat(value) : []
+      state.activeNames = (value || value === 0) ? [].concat(value) : []
     },
     { immediate: true }
   )

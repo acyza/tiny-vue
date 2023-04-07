@@ -65,7 +65,7 @@ const initApi = ({ api, state, emit, alert, constants, props, t }) => {
     computedSetValueTitle: computedSetValueTitle({ constants, props, t }),
     computedSetLocalTitle: computedSetLocalTitle({ constants, props, t }),
     computedSetLabelTitle: computedSetLabelTitle({ constants, props, t }),
-    computedSetDialogTitle: computedSetDialogTitle({ api, constants, props, t })
+    computedSetDialogTitle: computedSetDialogTitle({ constants, props, t })
   })
 }
 

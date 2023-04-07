@@ -18,9 +18,9 @@ const DEFAULT_THEME = {
   grid: { containLabel: true, left: 10, right: 10 }
 }
 
-let DEFAULT_COLORS = ['#19d4ae', '#5ab1ef', '#fa6e86', '#ffb980', '#0067a6', '#c4b4e4']
-
-DEFAULT_COLORS = DEFAULT_COLORS.concat(['#d87a80', '#9cbbff', '#d9d0c7', '#87a997', '#d49ea2', '#5b4947', '#7ba3a8'])
+const DEFAULT_COLORS = [
+  '#19d4ae', '#5ab1ef', '#fa6e86', '#ffb980', '#0067a6', '#c4b4e4',
+  '#d87a80', '#9cbbff', '#d9d0c7', '#87a997', '#d49ea2', '#5b4947', '#7ba3a8']
 
 const HEAT_MAP_COLOR = ['#5990FD', '#2DA769', '#EEBA18', '#F43146']
 
@@ -92,10 +92,10 @@ const itemContent = (content) => ['<span style="', 'float:right;', 'font-size:14
 
 const STATIC_PROPS = ['initOptions', 'loading', 'dataEmpty', 'judgeWidth', 'widthChangeDelay']
 
-let ECHARTS_SETTINGS = ['grid', 'dataZoom', 'visualMap', 'toolbox', 'title', 'legend', 'xAxis']
-
-ECHARTS_SETTINGS = ECHARTS_SETTINGS.concat(['yAxis', 'radar', 'tooltip', 'axisPointer', 'brush', 'geo'])
-ECHARTS_SETTINGS = ECHARTS_SETTINGS.concat(['timeline', 'graphic', 'series', 'backgroundColor', 'textStyle'])
+const ECHARTS_SETTINGS = [
+  'grid', 'dataZoom', 'visualMap', 'toolbox', 'title', 'legend', 'xAxis',
+  'yAxis', 'radar', 'tooltip', 'axisPointer', 'brush', 'geo',
+  'timeline', 'graphic', 'series', 'backgroundColor', 'textStyle']
 
 export {
   DEFAULT_THEME,

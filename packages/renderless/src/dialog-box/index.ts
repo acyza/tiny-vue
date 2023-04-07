@@ -19,7 +19,7 @@ export const computedAnimationName = ({ constants, props }) => () => (props.righ
 export const computedAddUnit = (value) => (isNaN(Number(value)) ? value : value + 'px')
 
 export const computedStyle = ({ props, state }) => () => {
-  const style = {}
+  const style: Partial<CSSStyleDeclaration> = {}
   let { width, top, rightSlide } = props
 
   if (top === undefined) {
@@ -34,6 +34,8 @@ export const computedStyle = ({ props, state }) => () => {
     style.top = top
 
     if (rightSlide) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       style.right = 0
       style.height = 'calc(100vh - ' + style.top + ')'
     } else {

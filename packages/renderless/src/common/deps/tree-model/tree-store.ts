@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { hasOwn, isNull } from '@opentiny/vue-renderless/common/type'
 import { getNodeKey } from '@opentiny/vue-renderless/common/deps/tree-model/util'
 import Node from '@opentiny/vue-renderless/common/deps/tree-model/node'

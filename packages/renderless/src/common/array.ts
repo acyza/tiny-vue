@@ -139,9 +139,9 @@ export const push = (arr, data) => {
  * @param {Array} arr
  * @returns {Array}
  */
-export const unique = (arr) => {
+export function unique<T>(arr: T[]) {
   if (Array.isArray(arr)) {
-    const array = []
+    const array: T[] = []
 
     for (let i = 0, len = arr.length; i < len; i++) {
       const value = arr[i]
@@ -171,7 +171,7 @@ const extend = (to, _from) => {
  * @param {Array} arr
  * @returns {Object}
  */
-export const toObject = (arr) => {
+export const toObject = (arr: object[]) => {
   const res = {}
 
   for (let i = 0; i < arr.length; i++) {
@@ -180,7 +180,7 @@ export const toObject = (arr) => {
     }
   }
 
-  return res
+  return res as object
 }
 
 /**
@@ -195,14 +195,16 @@ export const toObject = (arr) => {
  * @param {String} [idName] id 的属性名，缺省为 id
  * @returns {Array}
  */
-export const transformPidToChildren = (data, pidName = 'pId', childrenName = 'children', idName = 'id') => {
+export const transformPidToChildren = (data: [], pidName = 'pId', childrenName = 'children', idName = 'id') => {
   const result = []
 
   Array.isArray(data) &&
     data.forEach((item) => {
+      // eslint-disable-next-line eqeqeq
       if (item[pidName] == '0') {
         result.push(item)
       } else {
+        // eslint-disable-next-line eqeqeq
         const parent = find(data, (i) => i[idName] == item[pidName])
 
         if (!parent) {

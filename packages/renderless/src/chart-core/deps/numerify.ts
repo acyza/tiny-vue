@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 let ABBR = { th: 3, mi: 6, bi: 9, tr: 12 }
 let abbrLabel = { th: 'k', mi: 'm', bi: 'b', tr: 't' }
 let DEFAULT_OPTIONS = { zeroFormat: null, nullFormat: null, defaultFormat: '0,0', scalePercentBy100: true, abbrLabel }
@@ -155,7 +158,7 @@ function getOutStr({ decimal, negFlag, neg, signed, abbr }, number) {
   let outStr = number + decimal + (abbr || '')
 
   if (negFlag) {
-    outStr = negFlag && neg ? `(${outStr})` : outStr
+    outStr = (negFlag && neg) ? `(${outStr})` : outStr
   } else {
     if (signed >= 0) {
       const symbol = neg ? '-' : '+'
@@ -175,8 +178,8 @@ function numberToFormat(options, value, format, roundingFunction) {
     abbr: '',
     decimal: '',
     neg: false,
-    abbrForce: void 0,
-    signed: void 0,
+    abbrForce: undefined,
+    signed: undefined,
     format: format || '',
     value: value || 0,
     roundingFunction
@@ -216,7 +219,7 @@ let numerifyPercent = {
 
   format: function format(value, formatType, roundingFunction, numerify) {
     let space = ~formatType.indexOf(' %') ? ' ' : ''
-    let outStr = void 0
+    let outStr
 
     if (numerify.options.scalePercentBy100) {
       value = value * 100
@@ -238,8 +241,6 @@ let numerifyPercent = {
 }
 
 extend(options, DEFAULT_OPTIONS)
-
-let numerify
 
 function format(value, formatType, roundingFunc) {
   let { zeroFormat, nullFormat, defaultFormat } = options
@@ -268,7 +269,7 @@ function format(value, formatType, roundingFunc) {
   return output
 }
 
-numerify = function (input, formatType, roundingFunc) {
+const numerify = function (input, formatType, roundingFunc) {
   let { zeroFormat, nullFormat } = options
   let value = Number(input) || null
 

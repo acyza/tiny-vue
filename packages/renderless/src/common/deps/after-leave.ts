@@ -13,7 +13,7 @@
 const AfterLave = 'after-leave'
 const Speed = 300
 
-export default (instance, callback, speed = Speed, once = false) => {
+export default (instance, callback, speed = Speed, once = false, ...args) => {
   if (!instance || !callback) {
     throw new Error('instance & callback is required')
   }
@@ -28,7 +28,7 @@ export default (instance, callback, speed = Speed, once = false) => {
     called = true
 
     if (typeof callback === 'function') {
-      callback.apply(null, arguments)
+      callback(instance, callback, speed, once, ...args)
     }
   }
 

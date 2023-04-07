@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import browser from '@opentiny/vue-renderless/common/browser'
 import { isNull } from '@opentiny/vue-renderless/common/type'
 import debounce from '@opentiny/vue-renderless/common/deps/debounce'
@@ -427,9 +430,9 @@ export const updateStyle = ({ parent, refs, state, updatePopper }) => () => {
   }
 
   const tags = $el.querySelector(CASCADER.TagClass)
-  let suggestionPanelEl = null
+  let suggestionPanelEl = suggestionPanel.$el
 
-  if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
+  if (suggestionPanel && suggestionPanelEl) {
     const suggestionList = suggestionPanelEl.querySelector(CASCADER.ListClass)
     suggestionList.style.minWidth = inputInner.offsetWidth + 'px'
   }

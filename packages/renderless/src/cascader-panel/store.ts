@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import Node from './node'
 import { valueEquals, coerceTruthyValueToArray as toArray } from './index'
 
@@ -67,7 +70,7 @@ export default class Store {
       const lazy = !this.config.lazy
       const nodes = this.getFlattedNodes(false, lazy).filter((node) => valueEquals(node.path, value) || node.value === value)
 
-      return nodes && nodes.length ? nodes[0] : null
+      return (nodes && nodes.length) ? nodes[0] : null
     }
 
     return null

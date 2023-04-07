@@ -41,7 +41,7 @@ export const emitEvent = (emit, name, ...args) => {
 
     args.unshift(event)
     args.unshift(name)
-    emit.apply(null, args)
+    emit(...args)
   }
 
   return !cancel

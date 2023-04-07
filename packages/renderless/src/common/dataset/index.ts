@@ -68,7 +68,7 @@ const handlerArgs = (options, args) => {
     const { page, sort, filters } = args
     const { currentPage, pageSize } = page || {}
     const filterStr = getFilterStr(filters || {})
-    const orderBy = sort && sort.property ? sort.property + ' ' + sort.order : ''
+    const orderBy = (sort && sort.property) ? sort.property + ' ' + sort.order : ''
 
     options.url = format(options.url, {
       curPage: currentPage,

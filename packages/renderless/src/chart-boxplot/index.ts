@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { getFormated, htmlHandler, getLegend } from '@opentiny/vue-renderless/chart-core/deps/utils'
 import { itemPoint, itemLabel, itemContent } from '@opentiny/vue-renderless/chart-core/deps/constants'
 
@@ -105,14 +108,14 @@ const tooltipTemplate = ({ data, seriesType, seriesName, color, value, name }, t
   return tpl
 }
 
-const getTooltip = (args) => {
-  const { tooltipFormatter, tooltipLabel } = args
+const getTooltip = (...args) => {
+  const { tooltipFormatter, tooltipLabel } = args[0]
 
   return {
     trigger: 'item', // axis item
     formatter(items) {
       if (tooltipFormatter) {
-        return tooltipFormatter.apply(null, arguments)
+        return tooltipFormatter(...args)
       }
 
       let tpl = []

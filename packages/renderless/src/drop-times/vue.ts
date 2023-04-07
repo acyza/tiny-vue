@@ -28,7 +28,7 @@ export const renderless = (props, { onMounted, reactive, watch }, { emit }) => {
   const api = {
     state,
     change: change(emit),
-    init: init({ state, props, emit })
+    init: init({ state, props })
   }
 
   onMounted(api.init)

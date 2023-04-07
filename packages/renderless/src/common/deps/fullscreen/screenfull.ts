@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 
 const fullscreenApi = ['fullscreenElement', 'fullscreenEnabled', 'requestFullscreen', 'exitFullscreen', 'fullscreenchange', 'fullscreenerror']
@@ -36,7 +39,7 @@ const fullscreenApiMs = ['msFullscreenElement', 'msFullscreenEnabled', 'msReques
 
 const fullscreenApiMap = [fullscreenApi, fullscreenApiWebkit, fullscreenApiMoz, fullscreenApiMs]
 
-const document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {}
+const document = (typeof window !== 'undefined' && typeof window.document !== 'undefined') ? window.document : {}
 
 let fullscreenEvents = null
 

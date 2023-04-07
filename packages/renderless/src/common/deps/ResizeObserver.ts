@@ -10,6 +10,9 @@
 *
 */
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { on, off } from '@opentiny/vue-renderless/common/deps/dom'
 
 const MapShim = (function () {
@@ -80,7 +83,7 @@ const MapShim = (function () {
     }
 
     obClass.prototype.forEach = function (callback, ctx) {
-      if (ctx === void 0) {
+      if (ctx === undefined) {
         ctx = null
       }
 
@@ -262,7 +265,7 @@ const ResizeObserverController = (function () {
 
   ResizeObserverController.prototype.onTransitionEnd_ = function (_a) {
     const _b = _a.propertyName
-    const propertyName = _b === void 0 ? '' : _b
+    const propertyName = _b === undefined ? '' : _b
     const isReflowProperty = transitionKeys.some((key) => !!~propertyName.indexOf(key))
 
     isReflowProperty && this.refresh()
@@ -311,6 +314,7 @@ const getBordersSize = function (styles) {
   let positions = []
 
   for (let i = 1; i < arguments.length; i++) {
+    // eslint-disable-next-line prefer-rest-params
     positions[i - 1] = arguments[i]
   }
 
@@ -529,6 +533,7 @@ const ResizeObserverSPI = (function () {
   }
 
   ResizeObserverSPI.prototype.gatherActive = function () {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this
     this.clearActive()
 
@@ -587,10 +592,10 @@ const ResizeObserver = (function () {
   return ResizeObserver
 })();
 ['observe', 'unobserve', 'disconnect'].forEach((method) => {
-  ResizeObserver.prototype[method] = function () {
+  ResizeObserver.prototype[method] = function (...args) {
     let _a
 
-    return (_a = observers.get(this))[method].apply(_a, arguments)
+    return (_a = observers.get(this))[method](_a, ...args)
   }
 })
 
