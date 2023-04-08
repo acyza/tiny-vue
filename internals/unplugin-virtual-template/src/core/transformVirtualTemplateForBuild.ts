@@ -16,7 +16,7 @@ export function transformVirtualTemplateForBuild(code: string) {
 
     const getImports = (params: Record<string, string>) => {
       return Object.entries(params).map(([key, value]) => {
-        return `import ${key} from './${value}.vue'`
+        return `import ${key} from './${value}.js'`
       }).join('\n')
     }
 
